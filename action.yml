@@ -1,0 +1,17 @@
+name: 'auto-assign-reviewer'
+description: 'Assign a reviewer based on assignee'
+inputs:
+  token:
+    description: 'A github token'
+    required: true
+    default: 'default'
+  milliseconds:  # id of input
+    description: 'number of milliseconds to wait'
+    required: true
+    default: '1000'
+outputs:
+  time: # output will be available to future steps 
+    description: 'The message to output'
+runs:
+  using: 'node12'
+  main: 'dist/index.js'
