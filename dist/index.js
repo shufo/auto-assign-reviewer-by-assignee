@@ -6272,7 +6272,9 @@ const yaml = __webpack_require__(521);
 const fs = __webpack_require__(747);
 
 let parseConfig = function() {
-  const file = fs.readFileSync(".github/auto-assigner.yml");
+  const file = fs.readFileSync(".github/auto-assigner.yml", {
+    encoding: "utf8"
+  });
   try {
     return yaml.parse(file);
   } catch (error) {
