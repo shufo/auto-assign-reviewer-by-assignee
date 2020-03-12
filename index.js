@@ -2,6 +2,7 @@ const core = require("@actions/core");
 const github = require("@actions/github");
 const context = github.context;
 const wait = require("./wait");
+const parseConfig = require('./lib/util');
 
 // most @actions toolkit packages have async methods
 async function run() {
@@ -24,6 +25,8 @@ async function run() {
     });
 
     console.log(pullRequest);
+    
+    console.log(parseConfig());
   } catch (error) {
     core.setFailed(error.message);
   }

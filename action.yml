@@ -9,6 +9,10 @@ inputs:
     description: 'number of milliseconds to wait'
     required: true
     default: '1000'
+  config:
+    description: 'condifuration file'
+    required: false
+    default: '.github/auto-assigner.yml'
 outputs:
   time: # output will be available to future steps 
     description: 'The message to output'
