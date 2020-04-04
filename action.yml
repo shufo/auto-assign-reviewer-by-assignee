@@ -1,0 +1,20 @@
+name: 'Auto Assign Reviewer by Assignee'
+description: 'Assign a reviewer based on assignee'
+branding:
+  icon: 'at-sign'
+  color: 'green'
+inputs:
+  token:
+    description: 'A github token'
+    required: true
+    default: 'default'
+  config:
+    description: 'condifuration file'
+    required: false
+    default: '.github/auto-assigner.yml'
+outputs:
+  time: # output will be available to future steps 
+    description: 'The message to output'
+runs:
+  using: 'node12'
+  main: 'dist/index.js'
