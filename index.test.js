@@ -1,24 +1,6 @@
-const wait = require("./wait");
-const process = require("process");
-const cp = require("child_process");
-const path = require("path");
+const { parseConfig } = require("./lib/util");
 
-test("throws invalid number", async () => {
-  await expect(wait("foo")).rejects.toThrow("milleseconds not a number");
-});
-
-test("wait 500 ms", async () => {
-  const start = new Date();
-  await wait(500);
-  const end = new Date();
-  var delta = Math.abs(end - start);
-  expect(delta).toBeGreaterThan(450);
-});
-
-// shows how the runner will run a javascript action with env / stdout protocol
-test("test runs", () => {
-  process.env["INPUT_MILLISECONDS"] = 500;
-  process.env["TOKEN"] = "foo";
-  const ip = path.join(__dirname, "index.js");
-  console.log(cp.execSync(`node ${ip}`).toString());
+test("config parser", async () => {
+  const config = parseConfig(".github/auto-assigner.yml");
+  expect(config["shufo"]).toMatchObject(["shufo2"]);
 });

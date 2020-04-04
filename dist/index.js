@@ -1092,17 +1092,18 @@ module.exports = require("os");
 const core = __webpack_require__(470);
 const github = __webpack_require__(469);
 const context = github.context;
-const parseConfig = __webpack_require__(345);
+const { parseConfig } = __webpack_require__(345);
 const _ = __webpack_require__(557);
 
 // most @actions toolkit packages have async methods
 async function run() {
   try {
-    core.debug('config');
+    core.debug("config");
     core.debug(JSON.stringify(parseConfig()));
 
     const token = core.getInput("token", { required: true });
-    const config = parseConfig();
+    const configPath = core.getInput("config");
+    const config = parseConfig(configPath);
 
     const octokit = new github.GitHub(token);
     const { data: pullRequest } = await octokit.pulls.get({
@@ -6284,9 +6285,9 @@ exports.default = Alias;
 const yaml = __webpack_require__(521);
 const fs = __webpack_require__(747);
 
-let parseConfig = function() {
-  const file = fs.readFileSync(".github/auto-assigner.yml", {
-    encoding: "utf8"
+let parseConfig = function (path) {
+  const file = fs.readFileSync(path, {
+    encoding: "utf8",
   });
   try {
     return yaml.parse(file);
@@ -6295,7 +6296,7 @@ let parseConfig = function() {
   }
 };
 
-module.exports = parseConfig;
+module.exports = { parseConfig: parseConfig };
 
 
 /***/ }),

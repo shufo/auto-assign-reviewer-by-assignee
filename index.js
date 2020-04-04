@@ -1,17 +1,18 @@
 const core = require("@actions/core");
 const github = require("@actions/github");
 const context = github.context;
-const parseConfig = require("./lib/util");
+const { parseConfig } = require("./lib/util");
 const _ = require("lodash");
 
 // most @actions toolkit packages have async methods
 async function run() {
   try {
-    core.debug('config');
+    core.debug("config");
     core.debug(JSON.stringify(parseConfig()));
 
     const token = core.getInput("token", { required: true });
-    const config = parseConfig();
+    const configPath = core.getInput("config");
+    const config = parseConfig(configPath);
 
     const octokit = new github.GitHub(token);
     const { data: pullRequest } = await octokit.pulls.get({

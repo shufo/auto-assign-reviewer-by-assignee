@@ -1,21 +1,9 @@
-name: "units-test"
+name: "auto assign"
 on:
   pull_request:
     types: [assigned]
-  push:
-    branches:
-      - master
-      - 'releases/*'
 
 jobs:
-  # unit tests
-  units:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - run: yarn install
-    - run: yarn test
-
   # test action works running from the graph  
   test:
     runs-on: ubuntu-latest
@@ -23,5 +11,5 @@ jobs:
     - uses: actions/checkout@v2
     - uses: ./
       with:
-        milliseconds: 1000
+        config: '.github/auto-assigner.yml'
         token: ${{ secrets.GITHUB_TOKEN }}
