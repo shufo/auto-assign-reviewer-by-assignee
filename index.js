@@ -7,7 +7,7 @@ const _ = require("lodash");
 // most @actions toolkit packages have async methods
 async function run() {
   try {
-    core.debug(parseConfig());
+    core.setOutput("config", parseConfig().toString());
     const token = core.getInput("token", { required: true });
     const config = parseConfig();
 
