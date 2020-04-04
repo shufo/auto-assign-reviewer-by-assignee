@@ -9,12 +9,14 @@ async function run() {
   try {
     const token = core.getInput("token", { required: true });
     const configPath = core.getInput("config");
-    const config = parseConfig(configPath);
+    const octokit = new github.GitHub(token);
+    
+    const configContent = fetchContent(octokit, configPath);
+    const config = parseConfig(configContent);
 
     core.debug("config");
     core.debug(JSON.stringify(config));
 
-    const octokit = new github.GitHub(token);
     const { data: pullRequest } = await octokit.pulls.get({
       owner: context.repo.owner,
       repo: context.repo.repo,
@@ -42,6 +44,17 @@ async function assignReviewers(octokit, reviewers) {
     pull_number: context.payload.pull_request.number,
     reviewers: reviewers,
   });
+}
+
+async function fetchContent(client, repoPath) {
+  const response = await client.repos.getContents({
+    owner: github.context.repo.owner,
+    repo: github.context.repo.repo,
+    path: repoPath,
+    ref: github.context.sha,
+  });
+
+  return Buffer.from(response.data.content, response.data.encoding).toString();
 }
 
 run();
