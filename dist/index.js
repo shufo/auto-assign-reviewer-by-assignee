@@ -1098,12 +1098,12 @@ const _ = __webpack_require__(557);
 // most @actions toolkit packages have async methods
 async function run() {
   try {
-    core.debug("config");
-    core.debug(JSON.stringify(parseConfig()));
-
     const token = core.getInput("token", { required: true });
     const configPath = core.getInput("config");
     const config = parseConfig(configPath);
+
+    core.debug("config");
+    core.debug(JSON.stringify(config));
 
     const octokit = new github.GitHub(token);
     const { data: pullRequest } = await octokit.pulls.get({
