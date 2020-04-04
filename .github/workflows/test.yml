@@ -1,6 +1,7 @@
 name: "units-test"
 on:
   pull_request:
+    types: [assigned]
   push:
     branches:
       - master
