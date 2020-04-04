@@ -1,14 +1,13 @@
 const core = require("@actions/core");
 const github = require("@actions/github");
 const context = github.context;
-const wait = require("./wait");
 const parseConfig = require("./lib/util");
 const _ = require("lodash");
 
 // most @actions toolkit packages have async methods
 async function run() {
   try {
-    core.setOutput("config", parseConfig());
+    core.debug("config", parseConfig());
     const token = core.getInput("token", { required: true });
     const config = parseConfig();
 

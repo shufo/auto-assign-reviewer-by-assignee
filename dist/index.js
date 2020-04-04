@@ -1092,14 +1092,13 @@ module.exports = require("os");
 const core = __webpack_require__(470);
 const github = __webpack_require__(469);
 const context = github.context;
-const wait = __webpack_require__(949);
 const parseConfig = __webpack_require__(345);
 const _ = __webpack_require__(557);
 
 // most @actions toolkit packages have async methods
 async function run() {
   try {
-    core.setOutput("config", parseConfig());
+    core.debug("config", parseConfig());
     const token = core.getInput("token", { required: true });
     const config = parseConfig();
 
@@ -48651,24 +48650,6 @@ module.exports = function(fn) {
 	try { return fn() } catch (e) {}
 
 }
-
-/***/ }),
-
-/***/ 949:
-/***/ (function(module) {
-
-let wait = function(milliseconds) {
-  return new Promise((resolve, reject) => {
-    if (typeof(milliseconds) !== 'number') { 
-      throw new Error('milleseconds not a number'); 
-    }
-
-    setTimeout(() => resolve("done!"), milliseconds)
-  });
-}
-
-module.exports = wait;
-
 
 /***/ }),
 
