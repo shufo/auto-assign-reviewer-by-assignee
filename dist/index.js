@@ -1091,7 +1091,7 @@ const core = __webpack_require__(470);
 const github = __webpack_require__(469);
 const context = github.context;
 const wait = __webpack_require__(949);
-const parseConfig = __webpack_require__(345);
+const { parseConfig } = __webpack_require__(345);
 
 // most @actions toolkit packages have async methods
 async function run() {
@@ -1104,7 +1104,7 @@ async function run() {
     core.debug(new Date().toTimeString());
     console.log(ms);
     core.setOutput("time", new Date().toTimeString());
-
+    console.log(context);
     const token = core.getInput("token", { required: true });
     const octokit = new github.GitHub(token);
     const { data: pullRequest } = await octokit.pulls.get({
@@ -1114,7 +1114,7 @@ async function run() {
     });
 
     console.log(pullRequest);
-    
+
     console.log(parseConfig());
   } catch (error) {
     core.setFailed(error.message);
