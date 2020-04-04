@@ -1098,7 +1098,9 @@ const _ = __webpack_require__(557);
 // most @actions toolkit packages have async methods
 async function run() {
   try {
-    core.setOutput("config", JSON.stringify(parseConfig()));
+    core.debug('config');
+    core.debug(JSON.stringify(parseConfig()));
+
     const token = core.getInput("token", { required: true });
     const config = parseConfig();
 
