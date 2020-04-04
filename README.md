@@ -1,6 +1,6 @@
 # Auto Assign Reviewer By Assignee
 
-Automatically assigns reviewer based on assignee
+Automatically assigns reviewers based on assignee
 
 ## Configuration
 
