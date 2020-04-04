@@ -1091,7 +1091,7 @@ const core = __webpack_require__(470);
 const github = __webpack_require__(469);
 const context = github.context;
 const wait = __webpack_require__(949);
-const { parseConfig } = __webpack_require__(345);
+const parseConfig = __webpack_require__(345);
 
 // most @actions toolkit packages have async methods
 async function run() {
