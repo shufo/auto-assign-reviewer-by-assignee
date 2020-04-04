@@ -11,7 +11,7 @@ async function run() {
     const configPath = core.getInput("config");
     const octokit = new github.GitHub(token);
     
-    const configContent = fetchContent(octokit, configPath);
+    const configContent = await fetchContent(octokit, configPath);
     const config = parseConfig(configContent);
 
     core.debug("config");
