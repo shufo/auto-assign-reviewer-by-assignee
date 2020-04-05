@@ -6,6 +6,8 @@ Automatically assigns reviewers based on assignee
 
 create configuration file
 
+`.github/auto-assigner.yml`
+
 ```yaml
 ---
 # assignee: reviewer
@@ -25,6 +27,8 @@ john.*:
 ```
 
 create action file
+
+`.github/workflows/auto-assign.yml`
 
 ```yaml
 name: "Auto Assign"
