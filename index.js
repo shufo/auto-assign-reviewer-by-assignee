@@ -1,7 +1,7 @@
 const core = require("@actions/core");
 const github = require("@actions/github");
 const context = github.context;
-const { parseConfig } = require("./lib/util");
+const { parseConfig, hasAssignee, getReviewers } = require("./lib/util");
 const _ = require("lodash");
 
 // most @actions toolkit packages have async methods
@@ -10,7 +10,7 @@ async function run() {
     const token = core.getInput("token", { required: true });
     const configPath = core.getInput("config");
     const octokit = new github.GitHub(token);
-    
+
     const configContent = await fetchContent(octokit, configPath);
     const config = parseConfig(configContent);
 
@@ -27,8 +27,8 @@ async function run() {
     const assignees = _.map(pullRequest.assignees, "login");
 
     _.each(assignees, (assignee) => {
-      if (_.has(config, assignee)) {
-        let reviewers = config[assignee];
+      if (hasAssignee(config, assignee)) {
+        let reviewers = getReviewers(config, assignee);
         assignReviewers(octokit, reviewers);
       }
     });
