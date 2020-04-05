@@ -15,6 +15,13 @@ shufo:
 smith:
   - user1
   - user2
+# you can use regexp to match assignee
+john.*:
+  - foo
+  - bar
+# fallback
+.*:
+  - foo
 ```
 
 create action file
