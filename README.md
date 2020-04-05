@@ -39,7 +39,6 @@ on:
     types: [assigned]
 
 jobs:
-  # test action works running from the graph  
   assign_reviewer:
     runs-on: ubuntu-latest
     steps:
